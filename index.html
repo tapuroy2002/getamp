@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amp for Windows</title>
+<meta name="description" content="Amp is a music and video player for Windows 10 and 11. Free download.">
+<meta property="og:title" content="Amp for Windows">
+<meta property="og:description" content="A music and video player for Windows 10 and 11. Free download.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tapuroy2002.github.io/amp/">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #0a0a0a;
+    --muted: #6e6e73;
+    --line: #e5e5ea;
+    --card: #f5f5f7;
+    --btn-bg: #0a0a0a;
+    --btn-fg: #ffffff;
+    --tile: #0a0a0a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #000000;
+      --fg: #f5f5f7;
+      --muted: #98989d;
+      --line: #2c2c2e;
+      --card: #111113;
+      --btn-bg: #f5f5f7;
+      --btn-fg: #0a0a0a;
+      --tile: #1c1c1e;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 72px 16px 48px; }
+  .hero { text-align: center; }
+  .tile {
+    width: 112px; height: 112px; margin: 0 auto 28px;
+    border-radius: 26px; background: var(--tile);
+    display: grid; place-items: center;
+    box-shadow: 0 12px 40px rgba(0,0,0,.18);
+  }
+  .tile svg { width: 76px; height: 76px; }
+  h1 { font-size: clamp(40px, 8vw, 56px); line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 12px; font-weight: 700; }
+  .lead { font-size: 19px; color: var(--muted); margin: 0 auto 36px; max-width: 30em; }
+  .download {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--btn-bg); color: var(--btn-fg);
+    text-decoration: none; font-weight: 600; font-size: 17px;
+    padding: 15px 30px; border-radius: 999px;
+    transition: transform .15s ease, opacity .15s ease;
+  }
+  .download:hover { opacity: .88; }
+  .download:active { transform: scale(.97); }
+  .download svg { width: 20px; height: 20px; flex: none; }
+  .meta { margin: 14px 0 0; font-size: 14px; color: var(--muted); }
+  .meta a { color: inherit; }
+  section { margin-top: 72px; }
+  h2 { font-size: 24px; letter-spacing: -0.02em; margin: 0 0 18px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+  .card { background: var(--card); border-radius: 18px; padding: 20px; }
+  .card b { display: block; margin-bottom: 4px; }
+  .card span { color: var(--muted); font-size: 15px; }
+  ol { margin: 0; padding-left: 22px; }
+  ol li { margin: 0 0 10px; }
+  ol li::marker { color: var(--muted); }
+  .note { color: var(--muted); font-size: 15px; }
+  kbd {
+    font: inherit; font-size: 14px; font-weight: 600;
+    border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px;
+  }
+  footer { margin-top: 72px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+<main>
+  <div class="hero">
+    <div class="tile" aria-hidden="true">
+      <svg viewBox="0 0 512 512"><g fill="#fff">
+        <rect x="110" y="216" width="28" height="80" rx="14"/>
+        <rect x="160" y="176" width="28" height="160" rx="14"/>
+        <rect x="210" y="136" width="28" height="240" rx="14"/>
+        <rect x="260" y="100" width="28" height="312" rx="14"/>
+        <rect x="310" y="136" width="28" height="240" rx="14"/>
+        <rect x="360" y="176" width="28" height="160" rx="14"/>
+      </g></svg>
+    </div>
+    <h1>Amp</h1>
+    <p class="lead">A music and video player for Windows. Your songs and videos, beautifully played.</p>
+
+    <a class="download" id="download" href="https://github.com/tapuroy2002/Amp-releases/releases/latest">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
+      <span id="download-label">Download for Windows</span>
+    </a>
+    <p class="meta" id="meta">Free · Windows 10 and 11, 64-bit</p>
+    <p class="meta" id="portable" hidden>No install? <a id="portable-link" href="https://github.com/tapuroy2002/Amp-releases/releases/latest">Get the portable zip</a></p>
+  </div>
+
+  <section>
+    <h2>What it does</h2>
+    <div class="grid">
+      <div class="card"><b>Every format</b><span>MP3, FLAC, ALAC, WAV, Opus, DSD and more. Videos up to 8K with subtitles.</span></div>
+      <div class="card"><b>Hi-Res and bit-perfect</b><span>Plays at the file's own resolution through exclusive mode, when you ask for it.</span></div>
+      <div class="card"><b>Equalizer</b><span>A full equalizer with presets, plus crossfade and ReplayGain.</span></div>
+      <div class="card"><b>Your library, organised</b><span>Smart playlists, a tag editor, CUE albums, lyrics and listening stats.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Installing</h2>
+    <ol>
+      <li>Click <b>Download for Windows</b> and open the file it saves.</li>
+      <li>If Windows says <b>“Windows protected your PC”</b>, click <kbd>More info</kbd>, then <kbd>Run anyway</kbd>. The installer isn't code-signed yet.</li>
+      <li>Follow the steps. Amp opens when it's done.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Updates</h2>
+    <p class="note">When a new version is out, Amp tells you a few seconds after it starts. Click <b>Update now</b> and it updates itself and opens again. Your songs, playlists and settings stay.</p>
+  </section>
+
+  <footer>
+    <span>Amp by <a href="https://tapuroy2002.github.io/">Tapu Roy</a></span>
+    <a href="https://github.com/tapuroy2002/Amp-releases/releases">All versions</a>
+  </footer>
+</main>
+<script>
+  // Point the button straight at the newest installer, with its version and size.
+  // If GitHub can't be reached, it keeps linking to the release page.
+  (async () => {
+    try {
+      const res = await fetch('https://api.github.com/repos/tapuroy2002/Amp-releases/releases/latest', {
+        headers: { Accept: 'application/vnd.github+json' }
+      });
+      if (!res.ok) return;
+      const release = await res.json();
+      const version = String(release.tag_name || '').replace(/^v/i, '');
+      const assets = release.assets || [];
+      const setup = assets.find(a => /setup.*\.exe$/i.test(a.name));
+      const zip = assets.find(a => /portable.*\.zip$/i.test(a.name));
+      if (setup) {
+        document.getElementById('download').href = setup.browser_download_url;
+        const mb = Math.round(setup.size / 1048576);
+        document.getElementById('meta').textContent =
+          `Free · Version ${version} · ${mb} MB · Windows 10 and 11, 64-bit`;
+      }
+      if (zip) {
+        document.getElementById('portable-link').href = zip.browser_download_url;
+        document.getElementById('portable').hidden = false;
+      }
+    } catch (e) { /* keep the fallback link */ }
+  })();
+</script>
+</body>
+</html>
