@@ -380,6 +380,59 @@
   footer a { text-decoration: none; } footer a:hover { color: var(--fg); }
   footer nav { display: flex; gap: 24px; flex-wrap: wrap; }
 
+  /* ============ Every screen ============ */
+  /* Spacing grows with the screen instead of jumping at breakpoints. */
+  .hero { padding-top: clamp(116px, 14vw, 168px); }
+  .stage { margin-top: clamp(52px, 7vw, 88px); }
+  section { padding: clamp(80px, 11vw, 140px) 0; }
+  .statement { padding: clamp(96px, 12vw, 160px) 0; }
+  .final { padding: clamp(112px, 14vw, 180px) 0 clamp(96px, 12vw, 160px); }
+  .head { margin-bottom: clamp(40px, 5vw, 64px); }
+  .marquee { margin-top: clamp(16px, 3vw, 40px); }
+  /* The app window takes the height its content needs, so the cover stays
+     round and the controls stay in view at any width. */
+  .app { height: auto; min-height: clamp(340px, 44vw, 580px); }
+  .main > * { flex-shrink: 0; }
+  .frame .subt { max-width: 88%; white-space: normal; text-align: center; font-size: clamp(10px, 2.4vw, 12px); }
+  /* Below a wide laptop the heading takes the full width, the line under it. */
+  @media (max-width: 1100px) { .head { grid-template-columns: 1fr; gap: 0; } }
+  .days span { flex: 1; text-align: center; }
+  .days { gap: 6px; }
+  /* Tablets: the last small tile fills its row rather than sitting alone. */
+  @media (min-width: 621px) and (max-width: 980px) { .bento .tile:last-child { grid-column: span 6; } }
+  /* Phones */
+  @media (max-width: 520px) {
+    .cta { flex-direction: column; align-items: center; }
+    .cta .btn { width: 100%; max-width: 340px; }
+    .upd { flex-direction: column; gap: 16px; }
+    .tile h3 { font-size: 19px; }
+    .faq .ans { font-size: 15px; }
+    .trust { gap: 8px 18px; }
+  }
+  @media (max-width: 360px) {
+    h1 { font-size: 42px; }
+    .btn-lg { padding: 14px 22px; font-size: 15px; }
+  }
+  /* Phones in landscape: a short screen needs a shorter hero. */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .hero { padding-top: 96px; }
+    h1 { font-size: clamp(40px, 7vw, 72px); }
+  }
+  /* On a phone: Amp is for PCs, so offer to send the link over. */
+  .mnote { display: none; margin: 18px auto 0; max-width: 340px; font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .mnote button {
+    font: inherit; font-weight: 500; color: var(--fg); background: none; cursor: pointer;
+    border: 1px solid var(--line-2); border-radius: 999px; padding: 6px 14px; margin-top: 10px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .mnote button svg { width: 14px; height: 14px; }
+  @media (hover: none) and (pointer: coarse) and (max-width: 900px) { .mnote { display: block; } }
+  /* Large monitors: the whole page scales up rather than floating small
+     in the middle. */
+  @media (min-width: 1800px) { body { zoom: 1.15; } }
+  @media (min-width: 2300px) { body { zoom: 1.35; } }
+  @media (min-width: 3200px) { body { zoom: 1.75; } }
+
   /* ============ Reveal ============ */
   .js .rv { opacity: 0; transform: translateY(28px); transition: opacity 1s ease, transform 1s cubic-bezier(.2,.8,.2,1); transition-delay: var(--d, 0s); }
   .js .rv.in { opacity: 1; transform: none; }
@@ -430,6 +483,9 @@
         <a class="btn btn-solid btn-lg js-download" href="https://github.com/tapuroy2002/Amp-releases/releases/latest"><svg><use href="#win"/></svg>Download for Windows</a>
         <a class="btn btn-line btn-lg" href="#features">Explore features<svg class="arrow"><use href="#arrow"/></svg></a>
       </div>
+      <p class="mnote" id="mnote">On your phone? Amp runs on Windows 10 and 11 PCs.<br>
+        <button type="button" id="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg><span>Send the link to my PC</span></button>
+      </p>
       <div class="trust rv" style="--d:.8s">
         <span><svg><use href="#check"/></svg>Free</span>
         <span><svg><use href="#check"/></svg>No ads</span>
@@ -712,6 +768,22 @@
   const lines = [...document.querySelectorAll('#lyr div')];
   let li = 1;
   if (!reduce) setInterval(() => { lines.forEach(l => l.classList.remove('on')); li = (li + 1) % lines.length; lines[li].classList.add('on'); }, 2200);
+
+  // Phones: share the page (to email or chat it to the PC), else copy it.
+  const send = document.getElementById('send');
+  send.addEventListener('click', async () => {
+    const url = 'https://tapuroy2002.github.io/getamp/';
+    const label = send.querySelector('span');
+    try {
+      if (navigator.share) { await navigator.share({ title: 'Amp for Windows', url }); return; }
+      await navigator.clipboard.writeText(url);
+      label.textContent = 'Link copied';
+    } catch (e) {
+      if (e && e.name === 'AbortError') return;
+      label.textContent = url.replace('https://', '');
+    }
+    setTimeout(() => label.textContent = 'Send the link to my PC', 2500);
+  });
 
   // Reveal on scroll.
   const io = new IntersectionObserver(es => es.forEach(e => {
