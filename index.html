@@ -443,6 +443,43 @@
     .eq .curve { stroke-dashoffset: 0; } .eq .area { opacity: 1; } .bars i { transform: scaleY(var(--h)); }
     .statement .wd { color: var(--fg); }
   }
+
+  /* ============ Android picker ============ */
+  .picker {
+    width: min(440px, calc(100vw - 32px)); padding: 0; border: 1px solid var(--line-2); border-radius: 22px;
+    background: var(--surface); color: var(--fg); box-shadow: var(--shadow);
+  }
+  .picker::backdrop { background: rgba(0,0,0,.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  .picker[open] { animation: pick-in .28s cubic-bezier(.2,.8,.2,1); }
+  @keyframes pick-in { from { opacity: 0; transform: translateY(14px) scale(.98); } }
+  .picker .in { padding: 26px 24px 22px; }
+  .picker .top { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+  .picker .top svg { width: 22px; height: 22px; }
+  .picker h3 { margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -.01em; flex: 1; }
+  .picker .x { border: 0; background: none; color: var(--muted); font-size: 26px; line-height: 1; cursor: pointer; padding: 4px 6px; border-radius: 8px; }
+  .picker .x:hover { color: var(--fg); background: var(--surface-2); }
+  .picker .lead2 { margin: 0 0 18px; color: var(--muted); font-size: 14px; }
+  .opt {
+    display: flex; align-items: center; gap: 14px; text-decoration: none; padding: 16px; margin-bottom: 10px;
+    border: 1px solid var(--line-2); border-radius: 16px; transition: border-color .2s, background .2s, box-shadow .2s;
+  }
+  .opt:hover { background: var(--surface-2); }
+  .opt .t { flex: 1; min-width: 0; }
+  .opt b { display: block; font-size: 16px; font-weight: 600; }
+  .opt small { display: block; color: var(--muted); font-size: 13px; line-height: 1.45; margin-top: 2px; }
+  .opt .dl { width: 18px; height: 18px; color: var(--muted); flex: none; }
+  .opt .badge { display: none; font-size: 11px; font-weight: 600; letter-spacing: .02em; color: var(--on-solid); background: var(--solid); border-radius: 999px; padding: 2px 8px; margin-left: 6px; vertical-align: 2px; }
+  .opt.rec { border-color: var(--fg); box-shadow: 0 0 0 1px var(--fg) inset; }
+  .opt.rec .badge { display: inline-block; }
+  .picker .check {
+    display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 6px;
+    font: inherit; font-size: 14px; font-weight: 500; color: var(--fg); background: none; cursor: pointer;
+    border: 1px dashed var(--line-2); border-radius: 14px; padding: 12px;
+  }
+  .picker .check:hover { background: var(--surface-2); }
+  .picker .check svg { width: 16px; height: 16px; }
+  .picker .why { margin: 12px 2px 0; font-size: 13px; color: var(--muted); line-height: 1.5; min-height: 0; }
+  .picker .why:empty { display: none; }
 </style>
 </head>
 <body>
@@ -467,7 +504,7 @@
       <a href="#install">Install</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="btn btn-solid btn-sm js-download js-nav" href="https://github.com/tapuroy2002/Amp-releases/releases/latest">Download</a>
+    <a class="btn btn-solid btn-sm js-download js-nav" href="https://github.com/tapuroy2002/Amp-releases/releases/latest/download/Amp-Windows-Setup.exe">Download</a>
   </div>
 </header>
 
@@ -481,8 +518,8 @@
       <h1 id="h1"><span class="w">Every</span> <span class="w">song.</span> <span class="w">Every</span> <span class="w">video.</span><span class="br"></span> <span class="w soft">Beautifully</span> <span class="w soft">played.</span></h1>
       <p class="lead rv" style="--d:.5s">A music and video player for people who care how things sound. Hi-Res and bit-perfect audio, a pro equalizer and video up to 8K, in a design that stays out of the way.</p>
       <div class="cta rv" style="--d:.65s">
-        <a class="btn btn-solid btn-lg js-download" href="https://github.com/tapuroy2002/Amp-releases/releases/latest"><svg><use href="#win"/></svg>Download for Windows</a>
-        <a class="btn btn-line btn-lg js-android" href="https://github.com/tapuroy2002/Amp-releases/releases/latest"><svg><use href="#android"/></svg>Download for Android</a>
+        <a class="btn btn-solid btn-lg js-download" href="https://github.com/tapuroy2002/Amp-releases/releases/latest/download/Amp-Windows-Setup.exe"><svg><use href="#win"/></svg>Download for Windows</a>
+        <button type="button" class="btn btn-line btn-lg js-android"><svg><use href="#android"/></svg>Download for Android</button>
       </div>
       <p class="mnote" id="mnote">On an iPhone or iPad? Amp runs on Windows PCs and Android phones.<br>
         <button type="button" id="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg><span>Send the link to my PC</span></button>
@@ -705,7 +742,7 @@
         <details><summary>Why does Windows warn me when I install it?<span class="pm"></span></summary><div class="ans">The installer isn't code-signed yet, so Windows SmartScreen doesn't recognise it. Click <b>More info</b>, then <b>Run anyway</b>. You only see this once.</div></details>
         <details><summary>How do updates work?<span class="pm"></span></summary><div class="ans">A few seconds after Amp starts, it checks for a new version. If there is one, it asks you. Click <b>Update now</b> and it downloads, installs and opens again by itself. Your library and settings stay.</div></details>
         <details><summary>Does it change how my music sounds?<span class="pm"></span></summary><div class="ans">Only if you ask it to. With the equalizer off and exclusive mode on, Amp sends your files to the sound card exactly as they are. Nothing turns on by itself.</div></details>
-        <details><summary>How do I install it on Android?<span class="pm"></span></summary><div class="ans">Tap <b>Download for Android</b> and open the file when it finishes. Android asks once to allow installs from your browser: tap <b>Settings</b>, turn on <b>Allow from this source</b>, go back and tap <b>Install</b>. Most phones take the standard file; for an older 32-bit phone, use the <b>32-bit</b> link at the bottom of this page.</div></details>
+        <details><summary>How do I install it on Android?<span class="pm"></span></summary><div class="ans">Tap <b>Download for Android</b> and open the file when it finishes. Android asks once to allow installs from your browser: tap <b>Settings</b>, turn on <b>Allow from this source</b>, go back and tap <b>Install</b>. Pick <b>Latest phones</b> or <b>Older phones</b>; if you're not sure, tap <b>Check my phone</b> and Amp picks the right one for you.</div></details>
         <details><summary>How do I update on Android?<span class="pm"></span></summary><div class="ans">Download the newest version from this page and install it over the one you have. Your songs, playlists and settings stay.</div></details>
         <details><summary>Can I use it without installing?<span class="pm"></span></summary><div class="ans">Yes. Download the portable zip from the bottom of this page, unzip it anywhere and run <b>Amp.exe</b>. The portable copy doesn't update itself, so download new versions by hand.</div></details>
       </div>
@@ -720,13 +757,38 @@
       <h2 class="rv">Your music deserves <span class="soft">Amp.</span></h2>
       <p class="sub rv">Free for Windows and Android.</p>
       <div class="cta rv">
-        <a class="btn btn-solid btn-lg js-download" href="https://github.com/tapuroy2002/Amp-releases/releases/latest"><svg><use href="#win"/></svg>Download for Windows</a>
-        <a class="btn btn-line btn-lg js-android" href="https://github.com/tapuroy2002/Amp-releases/releases/latest"><svg><use href="#android"/></svg>Download for Android</a>
+        <a class="btn btn-solid btn-lg js-download" href="https://github.com/tapuroy2002/Amp-releases/releases/latest/download/Amp-Windows-Setup.exe"><svg><use href="#win"/></svg>Download for Windows</a>
+        <button type="button" class="btn btn-line btn-lg js-android"><svg><use href="#android"/></svg>Download for Android</button>
       </div>
-      <p class="meta mono rv"><span id="meta">Windows 10 and 11 · 64-bit</span><span id="portable" hidden> · <a id="portable-link" href="https://github.com/tapuroy2002/Amp-releases/releases/latest">Portable zip</a></span><br><span id="meta-android">Android 7.0 or newer</span><span id="apk32" hidden> · <a id="apk32-link" href="https://github.com/tapuroy2002/Amp-releases/releases/latest">32-bit phones</a></span></p>
+      <p class="meta mono rv"><span id="meta">Windows 10 and 11 · 64-bit</span><span> · <a href="https://github.com/tapuroy2002/Amp-releases/releases/latest/download/Amp-Windows-Portable.zip">Portable zip</a></span><br><span id="meta-android">Android 7.0 or newer</span></p>
     </div>
   </div>
 </main>
+
+<!-- Android: two downloads, and a check that picks the right one. -->
+<dialog class="picker" id="picker" aria-labelledby="picker-title">
+  <div class="in">
+    <div class="top">
+      <svg><use href="#android"/></svg>
+      <h3 id="picker-title">Download for Android</h3>
+      <button type="button" class="x" id="picker-close" aria-label="Close">×</button>
+    </div>
+    <p class="lead2">Android 7.0 or newer. Pick the one for your phone.</p>
+    <a class="opt" id="opt64" href="https://github.com/tapuroy2002/Amp-releases/releases/latest/download/Amp-Android-arm64.apk">
+      <span class="t"><b>Latest phones<span class="badge">Recommended</span></b><small>Most phones from the last few years · 64-bit · <span id="size64">38 MB</span></small></span>
+      <svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M7 11l5 5 5-5M5 20h14"/></svg>
+    </a>
+    <a class="opt" id="opt32" href="https://github.com/tapuroy2002/Amp-releases/releases/latest/download/Amp-Android-armv7.apk">
+      <span class="t"><b>Older phones<span class="badge">Recommended</span></b><small>Older or low-cost phones · 32-bit · <span id="size32">35 MB</span></small></span>
+      <svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M7 11l5 5 5-5M5 20h14"/></svg>
+    </a>
+    <button type="button" class="check" id="check-phone">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>
+      Not sure? Check my phone
+    </button>
+    <p class="why" id="why" aria-live="polite"></p>
+  </div>
+</dialog>
 
 <footer>
   <div class="wrap">
@@ -818,10 +880,60 @@
   addEventListener('resize', frame);
   frame();
 
+  // Android picker: Latest phones (64-bit) or Older phones (32-bit). Both are
+  // direct downloads of the newest release.
+  const picker = document.getElementById('picker');
+  const why = document.getElementById('why');
+  const opt64 = document.getElementById('opt64'), opt32 = document.getElementById('opt32');
+  const openPicker = e => {
+    e.preventDefault();
+    if (typeof picker.showModal === 'function') picker.showModal();
+    else location.href = opt64.href;  // very old browsers: the common choice
+  };
+  document.querySelectorAll('.js-android').forEach(b => b.addEventListener('click', openPicker));
+  document.getElementById('picker-close').addEventListener('click', () => picker.close());
+  picker.addEventListener('click', e => { if (e.target === picker) picker.close(); });
+
+  // Which one this phone takes. The browser is itself an app: a 64-bit one
+  // proves the phone runs 64-bit apps; a 32-bit one proves 32-bit apps run
+  // (some phones have a 64-bit chip but only run 32-bit apps, so 32-bit is
+  // the safe pick there). Newer Chrome says so directly; older browsers name
+  // the processor in navigator.platform ("Linux aarch64" or "Linux armv8l").
+  async function phoneBits() {
+    try {
+      const ua = navigator.userAgentData;
+      if (ua && ua.getHighEntropyValues) {
+        const v = await ua.getHighEntropyValues(['bitness', 'architecture']);
+        if (v.bitness === '64') return 64;
+        if (v.bitness === '32') return 32;
+      }
+    } catch (e) { /* fall back to the platform string */ }
+    const p = navigator.platform || '';
+    if (/aarch64|arm64/i.test(p)) return 64;
+    if (/armv7|armv8l|armv6|arm/i.test(p)) return 32;
+    return null;
+  }
+
+  document.getElementById('check-phone').addEventListener('click', async () => {
+    opt64.classList.remove('rec'); opt32.classList.remove('rec');
+    if (!isAndroid) {
+      why.textContent = "This isn't an Android phone. Open this page on your phone and tap Check my phone there.";
+      return;
+    }
+    const bits = await phoneBits();
+    const pick = bits === 32 ? opt32 : opt64;
+    pick.classList.add('rec');
+    why.textContent = bits === 64 ? 'Your phone runs 64-bit apps: Latest phones is the one for you.'
+      : bits === 32 ? 'Your phone runs 32-bit apps: Older phones is the one that works on it.'
+      : "Your phone didn't say. Latest phones fits most phones; if it won't install, use Older phones.";
+    pick.focus();
+  });
+
   // On an Android phone the Android download comes first (and the nav's
-  // Download button gets it); the iPhone note is for iPhones only.
+  // Download button opens the picker); the iPhone note is for iPhones only.
   const isAndroid = /Android/i.test(navigator.userAgent);
   if (isAndroid) {
+    document.querySelectorAll('.js-nav').forEach(a => a.addEventListener('click', openPicker));
     document.getElementById('mnote').remove();
     document.querySelectorAll('.cta').forEach(cta => {
       const win = cta.querySelector('.js-download'), droid = cta.querySelector('.js-android');
@@ -832,8 +944,9 @@
     });
   }
 
-  // Every Download button goes straight to the newest installer or APK; the
-  // page shows the version and size. Without GitHub they keep the release page.
+  // The links download the newest files directly (fixed names under
+  // releases/latest/download). GitHub's API only adds the version and sizes;
+  // without it the page still works.
   (async () => {
     try {
       const res = await fetch('https://api.github.com/repos/tapuroy2002/Amp-releases/releases/latest', { headers: { Accept: 'application/vnd.github+json' } });
@@ -842,12 +955,10 @@
       const version = String(release.tag_name || '').replace(/^v/i, '');
       const assets = release.assets || [];
       const setup = assets.find(a => /setup.*\.exe$/i.test(a.name));
-      const zip = assets.find(a => /portable.*\.zip$/i.test(a.name));
       const apk = assets.find(a => /android.*arm64.*\.apk$/i.test(a.name));
       const apk32 = assets.find(a => /android.*armv7.*\.apk$/i.test(a.name));
       if (setup) {
         const mb = Math.round(setup.size / 1048576);
-        document.querySelectorAll('.js-download').forEach(a => a.href = setup.browser_download_url);
         document.querySelectorAll('.js-ver').forEach(e => e.textContent = 'v' + version);
         document.querySelectorAll('.js-size').forEach(e => e.textContent = mb + ' MB');
         document.getElementById('eyebrow').textContent = `Amp ${version} for Windows and Android`;
@@ -855,20 +966,12 @@
       }
       if (apk) {
         const mb = Math.round(apk.size / 1048576);
-        document.querySelectorAll('.js-android').forEach(a => a.href = apk.browser_download_url);
-        if (isAndroid) document.querySelectorAll('.js-nav').forEach(a => a.href = apk.browser_download_url);
         document.querySelectorAll('.js-apk-size').forEach(e => e.textContent = mb + ' MB');
+        document.getElementById('size64').textContent = mb + ' MB';
         document.getElementById('meta-android').textContent = `Version ${version} · ${mb} MB · Android 7.0 or newer`;
       }
-      if (apk32) {
-        document.getElementById('apk32-link').href = apk32.browser_download_url;
-        document.getElementById('apk32').hidden = false;
-      }
-      if (zip) {
-        document.getElementById('portable-link').href = zip.browser_download_url;
-        document.getElementById('portable').hidden = false;
-      }
-    } catch (e) { /* keep the fallback links */ }
+      if (apk32) document.getElementById('size32').textContent = Math.round(apk32.size / 1048576) + ' MB';
+    } catch (e) { /* the links work without it */ }
   })();
 </script>
 </body>
