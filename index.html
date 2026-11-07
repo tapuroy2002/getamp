@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Amp for Windows</title>
-<meta name="description" content="Amp is a music and video player for Windows 10 and 11. Hi-Res and bit-perfect audio, DSD, a pro equalizer and video up to 8K. Free, no ads, no account.">
-<meta property="og:title" content="Amp for Windows">
-<meta property="og:description" content="Every song. Every video. Beautifully played. Free for Windows 10 and 11.">
+<title>Amp for Windows and Android</title>
+<meta name="description" content="Amp is a music and video player for Windows and Android. Hi-Res and bit-perfect audio, DSD, a pro equalizer and video up to 8K. Free, no ads, no account.">
+<meta property="og:title" content="Amp for Windows and Android">
+<meta property="og:description" content="Every song. Every video. Beautifully played. Free for Windows and Android.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tapuroy2002.github.io/getamp/">
 <meta name="theme-color" content="#000000">
@@ -453,6 +453,7 @@
     <rect x="310" y="136" width="28" height="240" rx="14"/><rect x="360" y="176" width="28" height="160" rx="14"/>
   </symbol>
   <symbol id="win" viewBox="0 0 24 24"><path fill="currentColor" d="M3 5.6 10.4 4.6v7H3zM11.4 4.5 21 3.1v8.5h-9.6zM3 12.4h7.4v7L3 18.4zM11.4 12.4H21v8.5l-9.6-1.4z"/></symbol>
+  <symbol id="android" viewBox="0 0 24 24"><path fill="currentColor" d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.66-.38l-1.86 3.22a11.4 11.4 0 0 0-9.84 0L5.22 5.92a.38.38 0 0 0-.66.38L6.4 9.48A10.8 10.8 0 0 0 1 18h22a10.8 10.8 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></symbol>
   <symbol id="arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
   <symbol id="check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.2 4L19 7"/></symbol>
 </svg>
@@ -460,13 +461,13 @@
 <header class="nav" id="nav">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Amp home"><span class="mark"><svg viewBox="0 0 512 512"><use href="#logo"/></svg></span>Amp</a>
-    <span class="chip mono js-ver">for Windows</span>
+    <span class="chip mono js-ver">Windows · Android</span>
     <nav class="nav-links" aria-label="Main">
       <a href="#features">Features</a>
       <a href="#install">Install</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="btn btn-solid btn-sm js-download" href="https://github.com/tapuroy2002/Amp-releases/releases/latest">Download</a>
+    <a class="btn btn-solid btn-sm js-download js-nav" href="https://github.com/tapuroy2002/Amp-releases/releases/latest">Download</a>
   </div>
 </header>
 
@@ -476,21 +477,21 @@
     <div class="hero-grid"></div>
     <div class="hero-glow"></div>
     <div class="wrap">
-      <div class="eyebrow mono rv" id="eyebrow">Amp for Windows</div>
+      <div class="eyebrow mono rv" id="eyebrow">Amp for Windows and Android</div>
       <h1 id="h1"><span class="w">Every</span> <span class="w">song.</span> <span class="w">Every</span> <span class="w">video.</span><span class="br"></span> <span class="w soft">Beautifully</span> <span class="w soft">played.</span></h1>
       <p class="lead rv" style="--d:.5s">A music and video player for people who care how things sound. Hi-Res and bit-perfect audio, a pro equalizer and video up to 8K, in a design that stays out of the way.</p>
       <div class="cta rv" style="--d:.65s">
         <a class="btn btn-solid btn-lg js-download" href="https://github.com/tapuroy2002/Amp-releases/releases/latest"><svg><use href="#win"/></svg>Download for Windows</a>
-        <a class="btn btn-line btn-lg" href="#features">Explore features<svg class="arrow"><use href="#arrow"/></svg></a>
+        <a class="btn btn-line btn-lg js-android" href="https://github.com/tapuroy2002/Amp-releases/releases/latest"><svg><use href="#android"/></svg>Download for Android</a>
       </div>
-      <p class="mnote" id="mnote">On your phone? Amp runs on Windows 10 and 11 PCs.<br>
+      <p class="mnote" id="mnote">On an iPhone or iPad? Amp runs on Windows PCs and Android phones.<br>
         <button type="button" id="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg><span>Send the link to my PC</span></button>
       </p>
       <div class="trust rv" style="--d:.8s">
         <span><svg><use href="#check"/></svg>Free</span>
         <span><svg><use href="#check"/></svg>No ads</span>
         <span><svg><use href="#check"/></svg>No account</span>
-        <span><svg><use href="#check"/></svg>Updates itself</span>
+        <span><svg><use href="#check"/></svg>Windows and Android</span>
       </div>
 
       <div class="stage" id="stage">
@@ -677,13 +678,14 @@
       <div class="duo">
         <div class="card upd rv">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div>
-          <div><h3>Always up to date</h3><p>When a new version is out, Amp tells you. One click on <b>Update now</b> and it updates itself and opens again. Your songs, playlists and settings stay.</p></div>
+          <div><h3>Always up to date</h3><p>On Windows, when a new version is out, Amp tells you. One click on <b>Update now</b> and it updates itself and opens again. Your songs, playlists and settings stay.</p></div>
         </div>
         <div class="card rv" style="--d:.08s">
           <ul class="req">
             <li><span>System</span>Windows 10 or 11</li>
             <li><span>Processor</span>64-bit (x64)</li>
             <li><span>Download</span><span class="js-size" style="color:var(--fg)">About 46 MB</span></li>
+            <li><span>Android</span>7.0 or newer · <span class="js-apk-size" style="color:var(--fg)">about 38 MB</span></li>
             <li><span>Price</span>Free</li>
           </ul>
         </div>
@@ -703,6 +705,8 @@
         <details><summary>Why does Windows warn me when I install it?<span class="pm"></span></summary><div class="ans">The installer isn't code-signed yet, so Windows SmartScreen doesn't recognise it. Click <b>More info</b>, then <b>Run anyway</b>. You only see this once.</div></details>
         <details><summary>How do updates work?<span class="pm"></span></summary><div class="ans">A few seconds after Amp starts, it checks for a new version. If there is one, it asks you. Click <b>Update now</b> and it downloads, installs and opens again by itself. Your library and settings stay.</div></details>
         <details><summary>Does it change how my music sounds?<span class="pm"></span></summary><div class="ans">Only if you ask it to. With the equalizer off and exclusive mode on, Amp sends your files to the sound card exactly as they are. Nothing turns on by itself.</div></details>
+        <details><summary>How do I install it on Android?<span class="pm"></span></summary><div class="ans">Tap <b>Download for Android</b> and open the file when it finishes. Android asks once to allow installs from your browser: tap <b>Settings</b>, turn on <b>Allow from this source</b>, go back and tap <b>Install</b>. Most phones take the standard file; for an older 32-bit phone, use the <b>32-bit</b> link at the bottom of this page.</div></details>
+        <details><summary>How do I update on Android?<span class="pm"></span></summary><div class="ans">Download the newest version from this page and install it over the one you have. Your songs, playlists and settings stay.</div></details>
         <details><summary>Can I use it without installing?<span class="pm"></span></summary><div class="ans">Yes. Download the portable zip from the bottom of this page, unzip it anywhere and run <b>Amp.exe</b>. The portable copy doesn't update itself, so download new versions by hand.</div></details>
       </div>
     </div>
@@ -714,11 +718,12 @@
     <div class="wrap">
       <div class="mark big-mark rv"><svg viewBox="0 0 512 512"><rect x="110" y="216" width="28" height="80" rx="14"/><rect x="160" y="176" width="28" height="160" rx="14"/><rect x="210" y="136" width="28" height="240" rx="14"/><rect x="260" y="100" width="28" height="312" rx="14"/><rect x="310" y="136" width="28" height="240" rx="14"/><rect x="360" y="176" width="28" height="160" rx="14"/></svg></div>
       <h2 class="rv">Your music deserves <span class="soft">Amp.</span></h2>
-      <p class="sub rv">Free for Windows 10 and 11.</p>
+      <p class="sub rv">Free for Windows and Android.</p>
       <div class="cta rv">
         <a class="btn btn-solid btn-lg js-download" href="https://github.com/tapuroy2002/Amp-releases/releases/latest"><svg><use href="#win"/></svg>Download for Windows</a>
+        <a class="btn btn-line btn-lg js-android" href="https://github.com/tapuroy2002/Amp-releases/releases/latest"><svg><use href="#android"/></svg>Download for Android</a>
       </div>
-      <p class="meta mono rv"><span id="meta">Windows 10 and 11 · 64-bit</span><span id="portable" hidden> · <a id="portable-link" href="https://github.com/tapuroy2002/Amp-releases/releases/latest">Portable zip</a></span></p>
+      <p class="meta mono rv"><span id="meta">Windows 10 and 11 · 64-bit</span><span id="portable" hidden> · <a id="portable-link" href="https://github.com/tapuroy2002/Amp-releases/releases/latest">Portable zip</a></span><br><span id="meta-android">Android 7.0 or newer</span><span id="apk32" hidden> · <a id="apk32-link" href="https://github.com/tapuroy2002/Amp-releases/releases/latest">32-bit phones</a></span></p>
     </div>
   </div>
 </main>
@@ -775,7 +780,7 @@
     const url = 'https://tapuroy2002.github.io/getamp/';
     const label = send.querySelector('span');
     try {
-      if (navigator.share) { await navigator.share({ title: 'Amp for Windows', url }); return; }
+      if (navigator.share) { await navigator.share({ title: 'Amp for Windows and Android', url }); return; }
       await navigator.clipboard.writeText(url);
       label.textContent = 'Link copied';
     } catch (e) {
@@ -813,8 +818,22 @@
   addEventListener('resize', frame);
   frame();
 
-  // Every Download button goes straight to the newest installer; the page
-  // shows its version and size. Without GitHub they keep the release page.
+  // On an Android phone the Android download comes first (and the nav's
+  // Download button gets it); the iPhone note is for iPhones only.
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  if (isAndroid) {
+    document.getElementById('mnote').remove();
+    document.querySelectorAll('.cta').forEach(cta => {
+      const win = cta.querySelector('.js-download'), droid = cta.querySelector('.js-android');
+      if (!win || !droid) return;
+      cta.insertBefore(droid, win);
+      droid.classList.replace('btn-line', 'btn-solid');
+      win.classList.replace('btn-solid', 'btn-line');
+    });
+  }
+
+  // Every Download button goes straight to the newest installer or APK; the
+  // page shows the version and size. Without GitHub they keep the release page.
   (async () => {
     try {
       const res = await fetch('https://api.github.com/repos/tapuroy2002/Amp-releases/releases/latest', { headers: { Accept: 'application/vnd.github+json' } });
@@ -824,13 +843,26 @@
       const assets = release.assets || [];
       const setup = assets.find(a => /setup.*\.exe$/i.test(a.name));
       const zip = assets.find(a => /portable.*\.zip$/i.test(a.name));
+      const apk = assets.find(a => /android.*arm64.*\.apk$/i.test(a.name));
+      const apk32 = assets.find(a => /android.*armv7.*\.apk$/i.test(a.name));
       if (setup) {
         const mb = Math.round(setup.size / 1048576);
         document.querySelectorAll('.js-download').forEach(a => a.href = setup.browser_download_url);
         document.querySelectorAll('.js-ver').forEach(e => e.textContent = 'v' + version);
         document.querySelectorAll('.js-size').forEach(e => e.textContent = mb + ' MB');
-        document.getElementById('eyebrow').textContent = `Amp ${version} for Windows`;
+        document.getElementById('eyebrow').textContent = `Amp ${version} for Windows and Android`;
         document.getElementById('meta').textContent = `Version ${version} · ${mb} MB · Windows 10 and 11 · 64-bit`;
+      }
+      if (apk) {
+        const mb = Math.round(apk.size / 1048576);
+        document.querySelectorAll('.js-android').forEach(a => a.href = apk.browser_download_url);
+        if (isAndroid) document.querySelectorAll('.js-nav').forEach(a => a.href = apk.browser_download_url);
+        document.querySelectorAll('.js-apk-size').forEach(e => e.textContent = mb + ' MB');
+        document.getElementById('meta-android').textContent = `Version ${version} · ${mb} MB · Android 7.0 or newer`;
+      }
+      if (apk32) {
+        document.getElementById('apk32-link').href = apk32.browser_download_url;
+        document.getElementById('apk32').hidden = false;
       }
       if (zip) {
         document.getElementById('portable-link').href = zip.browser_download_url;
