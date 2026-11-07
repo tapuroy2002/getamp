@@ -480,6 +480,23 @@
   .picker .check svg { width: 16px; height: 16px; }
   .picker .why { margin: 12px 2px 0; font-size: 13px; color: var(--muted); line-height: 1.5; min-height: 0; }
   .picker .why:empty { display: none; }
+
+  /* ============ Live downloads ============ */
+  .live {
+    display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 14px;
+    margin: 22px auto 0; padding: 9px 18px; border: 1px solid var(--line-2); border-radius: 999px;
+    font-size: 14px; color: var(--muted); background: color-mix(in srgb, var(--surface) 60%, transparent);
+  }
+  .live[hidden] { display: none; }
+  .live b { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .live .tag { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; letter-spacing: .12em; color: var(--fg); }
+  .live .dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 0 rgba(34,197,94,.6); animation: live-pulse 2s infinite; }
+  @keyframes live-pulse { 70% { box-shadow: 0 0 0 7px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
+  .live .p { display: inline-flex; align-items: center; gap: 6px; }
+  .live .p svg { width: 14px; height: 14px; color: var(--fg-2); }
+  .live .sep { width: 1px; height: 14px; background: var(--line-2); }
+  .live-wrap { text-align: center; }
+  @media (max-width: 520px) { .live .sep { display: none; } .live { gap: 6px 12px; padding: 9px 14px; } }
 </style>
 </head>
 <body>
@@ -529,6 +546,17 @@
         <span><svg><use href="#check"/></svg>No ads</span>
         <span><svg><use href="#check"/></svg>No account</span>
         <span><svg><use href="#check"/></svg>Windows and Android</span>
+      </div>
+      <!-- Shown once GitHub's download counts arrive (all releases, all files). -->
+      <div class="live-wrap">
+        <div class="live" id="live" hidden title="Downloads from GitHub, counted live: every version, installers and APKs (updates included).">
+          <span class="tag mono"><span class="dot"></span>LIVE</span>
+          <span><b id="dl-total">0</b> downloads</span>
+          <span class="sep"></span>
+          <span class="p"><svg><use href="#win"/></svg><b id="dl-win">0</b> Windows</span>
+          <span class="sep"></span>
+          <span class="p"><svg><use href="#android"/></svg><b id="dl-android">0</b> Android</span>
+        </div>
       </div>
 
       <div class="stage" id="stage">
@@ -945,14 +973,69 @@
   }
 
   // The links download the newest files directly (fixed names under
-  // releases/latest/download). GitHub's API only adds the version and sizes;
-  // without it the page still works.
+  // releases/latest/download). GitHub's API only adds the version, sizes and
+  // the live download counts; without it the page still works.
+  //
+  // One request lists every release: the newest gives the version and sizes,
+  // all of them the counts. It's kept for 5 minutes (GitHub allows a visitor
+  // 60 requests an hour) and asked again every 5 minutes while the page shows.
+  const RELEASES = 'https://api.github.com/repos/tapuroy2002/Amp-releases/releases?per_page=100';
+  const CACHE_KEY = 'amp-releases', FRESH_MS = 5 * 60 * 1000;
+
+  async function releases() {
+    let cached = null;
+    try { cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null'); } catch (e) { /* no storage */ }
+    if (cached && Date.now() - cached.at < FRESH_MS) return cached.data;
+    try {
+      const res = await fetch(RELEASES, { headers: { Accept: 'application/vnd.github+json' } });
+      if (!res.ok) throw new Error(res.status);
+      const data = (await res.json()).map(r => ({
+        tag: r.tag_name, draft: r.draft, pre: r.prerelease,
+        assets: (r.assets || []).map(a => ({ name: a.name, size: a.size, count: a.download_count })),
+      }));
+      try { localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), data })); } catch (e) { /* no storage */ }
+      return data;
+    } catch (e) {
+      return cached ? cached.data : null;  // an older count beats none
+    }
+  }
+
+  // Counts up from what's shown to the new number.
+  function countTo(el, to) {
+    const from = Number(el.dataset.n || 0);
+    el.dataset.n = to;
+    if (reduce || from === to) { el.textContent = to.toLocaleString('en-US'); return; }
+    const t0 = performance.now(), ms = 1200;
+    const step = now => {
+      const k = Math.min(1, (now - t0) / ms), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = Math.round(from + (to - from) * e).toLocaleString('en-US');
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  async function showLive() {
+    const data = await releases();
+    if (!data) return;
+    let win = 0, android = 0;
+    for (const r of data) for (const a of r.assets) {
+      if (/\.apk$/i.test(a.name)) android += a.count;
+      else if (/\.(exe|zip)$/i.test(a.name)) win += a.count;
+    }
+    document.getElementById('live').hidden = false;
+    countTo(document.getElementById('dl-total'), win + android);
+    countTo(document.getElementById('dl-win'), win);
+    countTo(document.getElementById('dl-android'), android);
+    return data;
+  }
+  setInterval(() => { if (!document.hidden) showLive(); }, FRESH_MS);
+
   (async () => {
     try {
-      const res = await fetch('https://api.github.com/repos/tapuroy2002/Amp-releases/releases/latest', { headers: { Accept: 'application/vnd.github+json' } });
-      if (!res.ok) return;
-      const release = await res.json();
-      const version = String(release.tag_name || '').replace(/^v/i, '');
+      const data = await showLive();
+      const release = data && data.find(r => !r.draft && !r.pre);
+      if (!release) return;
+      const version = String(release.tag || '').replace(/^v/i, '');
       const assets = release.assets || [];
       const setup = assets.find(a => /setup.*\.exe$/i.test(a.name));
       const apk = assets.find(a => /android.*arm64.*\.apk$/i.test(a.name));
