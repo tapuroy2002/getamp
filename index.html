@@ -926,8 +926,10 @@
   // Which one this phone takes. The browser is itself an app: a 64-bit one
   // proves the phone runs 64-bit apps; a 32-bit one proves 32-bit apps run
   // (some phones have a 64-bit chip but only run 32-bit apps, so 32-bit is
-  // the safe pick there). Newer Chrome says so directly; older browsers name
-  // the processor in navigator.platform ("Linux aarch64" or "Linux armv8l").
+  // the safe pick there). Browsers that tell name the processor in
+  // navigator.platform: "Linux aarch64" (64-bit) or "Linux armv8l"/"armv7l"
+  // (32-bit). Chrome on Android hides it: platform is always "Linux armv81"
+  // (with a one, not an l) and bitness is empty, so that answers nothing.
   async function phoneBits() {
     try {
       const ua = navigator.userAgentData;
@@ -937,9 +939,9 @@
         if (v.bitness === '32') return 32;
       }
     } catch (e) { /* fall back to the platform string */ }
-    const p = navigator.platform || '';
-    if (/aarch64|arm64/i.test(p)) return 64;
-    if (/armv7|armv8l|armv6|arm/i.test(p)) return 32;
+    const p = (navigator.platform || '').toLowerCase();
+    if (/\b(aarch64|arm64|x86_64)\b/.test(p)) return 64;
+    if (/\b(armv8l|armv7l|armv7|armv6l|i686)\b/.test(p)) return 32;
     return null;
   }
 
@@ -954,7 +956,7 @@
     pick.classList.add('rec');
     why.textContent = bits === 64 ? 'Your phone runs 64-bit apps: Latest phones is the one for you.'
       : bits === 32 ? 'Your phone runs 32-bit apps: Older phones is the one that works on it.'
-      : "Your phone didn't say. Latest phones fits most phones; if it won't install, use Older phones.";
+      : "Your browser doesn't say which one. Latest phones fits almost every phone; if Android says the app isn't compatible or won't install, use Older phones.";
     pick.focus();
   });
 
