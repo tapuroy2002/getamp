@@ -521,7 +521,7 @@
       <a href="#install">Install</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="btn btn-solid btn-sm js-download js-nav" href="https://github.com/tapuroy2002/Amp-releases/releases/latest/download/Amp-Windows-Setup.exe">Download</a>
+    <a class="btn btn-solid btn-sm js-download js-nav" href="https://tapuroy2002.github.io/Amp-releases/Amp-Windows-Setup.exe">Download</a>
   </div>
 </header>
 
@@ -535,7 +535,7 @@
       <h1 id="h1"><span class="w">Every</span> <span class="w">song.</span> <span class="w">Every</span> <span class="w">video.</span><span class="br"></span> <span class="w soft">Beautifully</span> <span class="w soft">played.</span></h1>
       <p class="lead rv" style="--d:.5s">A music and video player for people who care how things sound. Hi-Res and bit-perfect audio, a pro equalizer and video up to 8K, in a design that stays out of the way.</p>
       <div class="cta rv" style="--d:.65s">
-        <a class="btn btn-solid btn-lg js-download" href="https://github.com/tapuroy2002/Amp-releases/releases/latest/download/Amp-Windows-Setup.exe"><svg><use href="#win"/></svg>Download for Windows</a>
+        <a class="btn btn-solid btn-lg js-download" href="https://tapuroy2002.github.io/Amp-releases/Amp-Windows-Setup.exe"><svg><use href="#win"/></svg>Download for Windows</a>
         <button type="button" class="btn btn-line btn-lg js-android"><svg><use href="#android"/></svg>Download for Android</button>
       </div>
       <p class="mnote" id="mnote">On an iPhone or iPad? Amp runs on Windows PCs and Android phones.<br>
@@ -785,10 +785,10 @@
       <h2 class="rv">Your music deserves <span class="soft">Amp.</span></h2>
       <p class="sub rv">Free for Windows and Android.</p>
       <div class="cta rv">
-        <a class="btn btn-solid btn-lg js-download" href="https://github.com/tapuroy2002/Amp-releases/releases/latest/download/Amp-Windows-Setup.exe"><svg><use href="#win"/></svg>Download for Windows</a>
+        <a class="btn btn-solid btn-lg js-download" href="https://tapuroy2002.github.io/Amp-releases/Amp-Windows-Setup.exe"><svg><use href="#win"/></svg>Download for Windows</a>
         <button type="button" class="btn btn-line btn-lg js-android"><svg><use href="#android"/></svg>Download for Android</button>
       </div>
-      <p class="meta mono rv"><span id="meta">Windows 10 and 11 · 64-bit</span><span> · <a href="https://github.com/tapuroy2002/Amp-releases/releases/latest/download/Amp-Windows-Portable.zip">Portable zip</a></span><br><span id="meta-android">Android 7.0 or newer</span></p>
+      <p class="meta mono rv"><span id="meta">Windows 10 and 11 · 64-bit</span><span> · <a href="https://tapuroy2002.github.io/Amp-releases/Amp-Windows-Portable.zip">Portable zip</a></span><br><span id="meta-android">Android 7.0 or newer</span></p>
     </div>
   </div>
 </main>
@@ -802,11 +802,11 @@
       <button type="button" class="x" id="picker-close" aria-label="Close">×</button>
     </div>
     <p class="lead2">Android 7.0 or newer. Pick the one for your phone.</p>
-    <a class="opt" id="opt64" href="https://github.com/tapuroy2002/Amp-releases/releases/latest/download/Amp-Android-arm64.apk">
+    <a class="opt" id="opt64" href="https://tapuroy2002.github.io/Amp-releases/Amp-Android-arm64.apk">
       <span class="t"><b>Latest phones<span class="badge">Recommended</span></b><small>Most phones from the last few years · 64-bit · <span id="size64">38 MB</span></small></span>
       <svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M7 11l5 5 5-5M5 20h14"/></svg>
     </a>
-    <a class="opt" id="opt32" href="https://github.com/tapuroy2002/Amp-releases/releases/latest/download/Amp-Android-armv7.apk">
+    <a class="opt" id="opt32" href="https://tapuroy2002.github.io/Amp-releases/Amp-Android-armv7.apk">
       <span class="t"><b>Older phones<span class="badge">Recommended</span></b><small>Older or low-cost phones · 32-bit · <span id="size32">35 MB</span></small></span>
       <svg class="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M7 11l5 5 5-5M5 20h14"/></svg>
     </a>
@@ -975,8 +975,9 @@
     });
   }
 
-  // The links download the newest files directly (fixed names under
-  // releases/latest/download). GitHub's API only adds the version, sizes and
+  // The links download the newest files directly (fixed names on the
+  // Amp-releases "files" branch, served by Pages: release downloads on
+  // github.com time out in some places). GitHub's API only adds the version, sizes and
   // the live download counts; without it the page still works.
   //
   // One request lists every release: the newest gives the version and sizes,
