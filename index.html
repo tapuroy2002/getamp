@@ -1018,10 +1018,27 @@
     requestAnimationFrame(step);
   }
 
+  // Downloads from the Pages copy aren't in GitHub's counts, so each click
+  // on one adds to a free counter (Abacus), and the shown count is both.
+  const COUNTER = 'https://abacus.jasoncameron.dev', COUNTER_NS = 'tapuroy2002-amp';
+  const counterKey = href => /\.apk$/i.test(href) ? 'android' : 'windows';
+  document.addEventListener('click', e => {
+    const a = e.target.closest && e.target.closest('a[href*="/Amp-releases/Amp-"]');
+    if (!a) return;
+    fetch(`${COUNTER}/hit/${COUNTER_NS}/${counterKey(a.href)}`, { keepalive: true }).catch(() => {});
+    try { localStorage.removeItem(CACHE_KEY); } catch (err) { /* no storage */ }
+  });
+  async function counted(key) {
+    try {
+      const res = await fetch(`${COUNTER}/get/${COUNTER_NS}/${key}`);
+      return res.ok ? Number((await res.json()).value) || 0 : 0;  // 404 until the first click
+    } catch (e) { return 0; }
+  }
+
   async function showLive() {
-    const data = await releases();
+    const [data, extraWin, extraAndroid] = await Promise.all([releases(), counted('windows'), counted('android')]);
     if (!data) return;
-    let win = 0, android = 0;
+    let win = extraWin, android = extraAndroid;
     for (const r of data) for (const a of r.assets) {
       if (/\.apk$/i.test(a.name)) android += a.count;
       else if (/\.(exe|zip)$/i.test(a.name)) win += a.count;
